@@ -1,8 +1,19 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { UserType } from "./types/UserType";
+import axios from 'axios';
+import getData from './getData.json'
+import Login from './compornent/Login'
 
-function App() {
+
+const App: React.FC <{}>= () =>  {
+
+
+
+
+  type DataType = typeof getData;
+
   const isFlag1: boolean = true;
   const isFlag2: boolean = false;
   // const isFlag3: boolean = 'aaa';
@@ -29,11 +40,11 @@ function App() {
   //   return 'hello'
   // };
 
-  const error = (number: string): never => {
-    throw new Error();
-  };
+  // const error = (number: string): never => {
+  //   throw new Error();
+  // };
 
-  console.log(error('hello'));
+  // console.log(error('hello'));
 
   let object2: { id: number, name: string } = { id: 1, name: 'hattori' };
 
@@ -73,21 +84,39 @@ function App() {
     battingAverage: 3.65,
   }
 
-  interface mondai{
+  interface MondaiInterface{
     id: number;
     name: string;
     url: string;
-    isStart: false;
+    isStart: boolean;
   }
 
-  const mondai = {
+  const mondai:MondaiInterface = {
     id: 1,
     name: 'mondai',
     url: 'https://mondai.com',
-    isStart: false,
+    isStart: true,
   }
 
+  const mondai2:UserType = {
+    id: 1,
+    name: 'mondai',
+    url: 'https://mondai.com',
+    isStart: true,
+  }
+
+  const handleAxios = async() => {
+    const res = await axios.get('https://jsonplaceholder.typicode.com/users')
+    const data: DataType = res.data
+    console.log(data)
+}
+
+  <Login id="1" name="hattori" age={25} isLive={true} />
   
+
+
+
+
   
   
 
@@ -109,6 +138,7 @@ function App() {
         >
           Learn React
         </a>
+        <button onClick={handleAxios} >Data取得</button>
       </header>
     </div>
   );
